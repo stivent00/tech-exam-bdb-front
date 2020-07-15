@@ -1,0 +1,67 @@
+<h4>Add <small> Location </small></h4>
+<hr>
+<form autocomplete="off" [formGroup]="forma" (ngSubmit)="guardar()">
+    <div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">ID</label>
+            <div class="col-8">
+                <input class="form-control" type="number" placeholder="id" formControlName="id_location" [class.is-invalid]="idInvalid">
+                <small class="form-text text-danger" *ngIf="idInvalid">ID is required</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Name</label>
+            <div class="col-8">
+                <input class="form-control" type="text" formControlName="name_location" placeholder="Name" [class.is-invalid]="nameInvalid">
+                <small class="form-text text-danger" *ngIf="nameInvalid">Name is required</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Area <small>m2</small></label>
+            <div class="col-8">
+                <input class="form-control" type="number" formControlName="area_location" placeholder="Area" [class.is-invalid]="areaInvalid">
+                <small class="form-text text-danger" *ngIf="areaInvalid">Area is required</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-2 col-form-label">ID parent</label>
+            <div class="col-8">
+                <select class="form-control" formControlName="id_parent">
+                    <option *ngFor="let location of locations" [value]="location.id_location">
+                        {{ location.name_location }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-dark btn-block">
+                Add
+            </button>
+        </div>
+    </div>
+
+
+
+</form>
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-8">
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show text-center" role="alert">
+                <strong>The location has been registered!</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <a class="btn btn-outline-success btn-sm m-2" (click)="goSearch()">See locations</a>
+            </div>
+            <div *ngIf="error" class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+                <strong>Could not save location...</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
